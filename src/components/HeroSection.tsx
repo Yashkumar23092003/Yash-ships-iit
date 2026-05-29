@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import yashPortrait from "@/logo/Yash.png";
 import yashAnimated from "@/logo/Yash_animated.png";
 
@@ -22,7 +22,9 @@ const HeroSection = () => {
           </p>
 
           <h1 className="max-w-4xl font-inter text-3xl font-extrabold leading-[0.98] tracking-normal sm:text-4xl md:text-5xl lg:text-6xl">
-            I turn messy founder problems into products people can actually use.
+            Smart enough to think,
+            <br />
+            Foolish enough to execute
           </h1>
 
           <p className="mt-7 max-w-2xl text-base leading-7 text-foreground/78 sm:text-lg sm:leading-8">
@@ -61,6 +63,13 @@ const HeroSection = () => {
               className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/35 px-6 py-3 font-syne text-sm font-bold text-primary transition-colors hover:bg-primary/10"
             >
               Talk with me <ArrowUpRight className="h-4 w-4" />
+            </a>
+            <a
+              href="/pdf/Yash_kumar.pdf"
+              download="Yash_kumar_resume.pdf"
+              className="inline-flex items-center justify-center gap-1.5 rounded-md px-4 py-3 font-mono text-xs font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5"
+            >
+              Resume <Download className="h-3.5 w-3.5" />
             </a>
           </motion.div>
         </motion.div>
