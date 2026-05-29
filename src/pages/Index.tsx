@@ -7,6 +7,7 @@ import ExperienceTimeline from "@/components/ExperienceTimeline";
 import SelectedWorkSection from "@/components/SelectedWorkSection";
 import SkillsSection from "@/components/SkillsSection";
 import AchievementsSection from "@/components/AchievementsSection";
+import CampusLeadershipSection from "@/components/CampusLeadershipSection";
 import BookingSection from "@/components/BookingSection";
 import Footer from "@/components/Footer";
 
@@ -21,6 +22,7 @@ const Index = () => (
     <SelectedWorkSection />
     <SkillsSection />
     <AchievementsSection />
+    <CampusLeadershipSection />
     <BookingSection />
     <Footer />
   </>

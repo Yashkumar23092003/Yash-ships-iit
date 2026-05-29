@@ -1,13 +1,13 @@
-import { Award, BadgeCheck, DollarSign, Medal, Rocket, Target, Trophy } from "lucide-react";
+import { Award, BadgeCheck, DollarSign, IndianRupeeIcon, Medal, Rocket, Target, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 
 const achievements = [
-  { icon: Trophy, stat: "AIR 1380", label: "JEE Advanced (Top 0.5% of 250K+ students)" },
+  // { icon: Trophy, stat: "AIR 1380", label: "JEE Advanced (Top 0.5% of 250K+ students)" },
   { icon: Medal, stat: "Top 25 / 1000+", label: "Teams - IIT Delhi FITT Hackathon" },
   { icon: Award, stat: "Top 100", label: "Samsung Solve for Tomorrow (Nationwide)" },
   { icon: BadgeCheck, stat: "NDA SSB Cleared", label: "Selected through the National Defence Academy SSB process" },
   { icon: Rocket, stat: "Microsoft", label: "For Startups - Founders Hub" },
-  { icon: DollarSign, stat: "Rs40,000", label: "Revenue - Self-built MVPs" },
+  { icon: IndianRupeeIcon, stat: "Rs40,000", label: "Revenue generated through startups in college" },
   { icon: Target, stat: "99.3 %ile", label: "JEE Mains 2021" },
 ];
 
