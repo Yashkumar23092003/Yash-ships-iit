@@ -4,7 +4,6 @@ const stats = [
   { number: "10,000+", label: "Users shipped to" },
   { number: "150+", label: "User interviews conducted" },
   { number: "3", label: "Products launched (0->1)" },
-  { number: "AIR 1380", label: "JEE Advanced" },
   { number: "Top 25", label: "/ 1,000+ Teams (FITT)" },
 ];
 
@@ -15,7 +14,7 @@ const StatsBar = () => (
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 text-center md:grid-cols-5"
+      className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 text-center md:grid-cols-4"
     >
       {stats.map((s, i) => (
         <motion.div
