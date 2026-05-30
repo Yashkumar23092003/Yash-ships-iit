@@ -9,8 +9,8 @@ const Footer = () => (
         <a href="https://www.linkedin.com/in/yash-iitd" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
           LinkedIn
         </a>
-        <a href="mailto:yashraj8699@gmail.com" className="hover:text-primary transition-colors">
-          yashraj8699@gmail.com
+        <a href="mailto:yash9704.iitd@gmail.com" className="hover:text-primary transition-colors">
+          yash9704.iitd@gmail.com
         </a>
         <a href="tel:+918699427745" className="hover:text-primary transition-colors">
           +91 8699427745
