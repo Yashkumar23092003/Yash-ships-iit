@@ -64,6 +64,35 @@ body::before {
   background-size: 256px 256px;
 }
 
+/* Cursor-tracking spotlight glow (position fed via --spot-x/--spot-y) */
+.spotlight-card {
+  position: relative;
+}
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    380px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    hsl(var(--primary) / 0.09),
+    transparent 65%
+  );
+}
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-card::after {
+    display: none;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

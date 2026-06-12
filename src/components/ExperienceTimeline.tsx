@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { trackSpotlight } from "@/lib/spotlight";
 
 type OwnedItem = {
   title: string;
@@ -180,7 +182,15 @@ const experiences: CompanyBlock[] = [
   },
 ];
 
-const ExperienceTimeline = () => (
+const ExperienceTimeline = () => {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 75%", "end 55%"],
+  });
+  const lineScale = useSpring(scrollYProgress, { stiffness: 90, damping: 25 });
+
+  return (
   <section className="px-6 py-24" id="experience">
     <div className="mx-auto max-w-6xl">
       <motion.h2
@@ -192,8 +202,12 @@ const ExperienceTimeline = () => (
         Where I've <span className="text-primary">Operated</span>
       </motion.h2>
 
-      <div className="relative">
-        <div className="absolute bottom-0 left-0 top-0 hidden w-px bg-gradient-to-b from-primary/70 via-primary/35 to-transparent md:block" />
+      <div ref={timelineRef} className="relative">
+        <div className="absolute bottom-0 left-0 top-0 hidden w-px bg-border/70 md:block" />
+        <motion.div
+          style={{ scaleY: lineScale }}
+          className="absolute bottom-0 left-0 top-0 hidden w-px origin-top bg-gradient-to-b from-primary via-primary/70 to-primary/25 shadow-[0_0_10px_hsl(var(--primary)/0.5)] md:block"
+        />
 
         <div className="space-y-12 md:pl-10">
           {experiences.map((exp, i) => (
@@ -203,9 +217,16 @@ const ExperienceTimeline = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ delay: i * 0.08, duration: 0.45 }}
-              className="relative rounded-lg border border-border bg-card/70 p-6 shadow-2xl shadow-black/20 backdrop-blur-sm md:p-8"
+              onMouseMove={trackSpotlight}
+              className="spotlight-card relative rounded-lg border border-border bg-card/70 p-6 shadow-2xl shadow-black/20 backdrop-blur-sm md:p-8"
             >
-              <div className="absolute -left-[47px] top-9 hidden h-3.5 w-3.5 rounded-full border-2 border-background bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.9)] md:block" />
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ type: "spring", stiffness: 320, damping: 16, delay: 0.2 + i * 0.08 }}
+                className="absolute -left-[47px] top-9 hidden h-3.5 w-3.5 rounded-full border-2 border-background bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.9)] md:block"
+              />
 
               <div className="mb-7 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div>
@@ -295,6 +316,7 @@ const ExperienceTimeline = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default ExperienceTimeline;

@@ -1,11 +1,34 @@
-import { motion } from "framer-motion";
+import type { MouseEvent } from "react";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Download } from "lucide-react";
 import yashPortrait from "@/logo/Yash.png";
 import yashAnimated from "@/logo/Yash_animated.png";
 
+import Magnetic from "@/components/Magnetic";
+
 const proofPoints = ["IIT Delhi", "Co-founded Homescanner.ai", "10K+ users shipped to"];
 
 const HeroSection = () => {
+  const reducedMotion = useReducedMotion();
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const springTiltX = useSpring(tiltX, { stiffness: 180, damping: 22 });
+  const springTiltY = useSpring(tiltY, { stiffness: 180, damping: 22 });
+
+  const onPortraitMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (reducedMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    tiltY.set((px - 0.5) * 10);
+    tiltX.set(-(py - 0.5) * 10);
+  };
+
+  const onPortraitLeave = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
+
   return (
     <section className="relative min-h-[92vh] overflow-hidden px-6 pt-28 pb-16">
       <div className="absolute left-0 top-24 h-px w-full bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
@@ -50,27 +73,33 @@ const HeroSection = () => {
             transition={{ delay: 0.25, duration: 0.45 }}
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
-            <a
-              href="#projects"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-syne text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              See shipped work <ArrowDown className="h-4 w-4" />
-            </a>
-            <a
-              href="https://cal.com/yash-kumar-fcml81/1-1-meeting"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/35 px-6 py-3 font-syne text-sm font-bold text-primary transition-colors hover:bg-primary/10"
-            >
-              Talk with me <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a
-              href="/pdf/Yash_kumar.pdf"
-              download="Yash_kumar_resume.pdf"
-              className="inline-flex items-center justify-center gap-1.5 rounded-md px-4 py-3 font-mono text-xs font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5"
-            >
-              Resume <Download className="h-3.5 w-3.5" />
-            </a>
+            <Magnetic strength={0.2} className="grid sm:inline-grid">
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 font-syne text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                See shipped work <ArrowDown className="h-4 w-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.2} className="grid sm:inline-grid">
+              <a
+                href="https://cal.com/yash-kumar-fcml81/1-1-meeting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-primary/35 px-6 py-3 font-syne text-sm font-bold text-primary transition-colors hover:bg-primary/10"
+              >
+                Talk with me <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.2} className="grid sm:inline-grid">
+              <a
+                href="/pdf/Yash_kumar.pdf"
+                download="Yash_kumar_resume.pdf"
+                className="inline-flex items-center justify-center gap-1.5 rounded-md px-4 py-3 font-mono text-xs font-medium text-muted-foreground transition-colors hover:text-primary hover:bg-primary/5"
+              >
+                Resume <Download className="h-3.5 w-3.5" />
+              </a>
+            </Magnetic>
           </motion.div>
         </motion.div>
 
@@ -81,7 +110,12 @@ const HeroSection = () => {
           className="relative mx-auto w-full max-w-[440px]"
         >
           <div className="absolute -inset-4 rotate-3 border border-primary/25" />
-          <div className="relative overflow-hidden rounded-[1.25rem] border border-border bg-card shadow-2xl shadow-black/40 cursor-pointer group">
+          <motion.div
+            onMouseMove={onPortraitMove}
+            onMouseLeave={onPortraitLeave}
+            style={{ rotateX: springTiltX, rotateY: springTiltY, transformPerspective: 900 }}
+            className="relative overflow-hidden rounded-[1.25rem] border border-border bg-card shadow-2xl shadow-black/40 cursor-pointer group"
+          >
             <img
               src={yashAnimated}
               alt="Yash Kumar smiling outdoors"
@@ -92,7 +126,7 @@ const HeroSection = () => {
               alt="Yash Kumar smiling outdoors"
               className="aspect-[4/5] w-full object-cover absolute inset-0 transition-opacity duration-500 opacity-0 group-hover:opacity-100"
             />
-          </div>
+          </motion.div>
           <div className="absolute -bottom-6 left-5 right-5 border border-border bg-background/90 p-4 backdrop-blur">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-primary">
               Operating note

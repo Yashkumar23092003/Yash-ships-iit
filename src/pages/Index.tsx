@@ -1,3 +1,4 @@
+import GalaxyBackground from "@/components/GalaxyBackground";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsBar from "@/components/StatsBar";
@@ -13,6 +14,7 @@ import Footer from "@/components/Footer";
 
 const Index = () => (
   <>
+    <GalaxyBackground />
     <Navbar />
     <HeroSection />
     <StatsBar />

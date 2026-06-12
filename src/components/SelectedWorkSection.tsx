@@ -1,6 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { trackSpotlight } from "@/lib/spotlight";
+
 const projects = [
   {
     name: "Homescanner.ai",
@@ -86,7 +88,8 @@ const SelectedWorkSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.06, duration: 0.4 }}
-            className="group grid gap-6 border border-border bg-card/70 p-5 transition-colors hover:border-primary/40 hover:bg-card md:grid-cols-[0.85fr_1.15fr_auto] md:items-center md:p-6"
+            onMouseMove={trackSpotlight}
+            className="spotlight-card group grid gap-6 border border-border bg-card/70 p-5 transition-colors hover:border-primary/40 hover:bg-card md:grid-cols-[0.85fr_1.15fr_auto] md:items-center md:p-6"
           >
             <div>
               <p className="mb-2 font-mono text-xs uppercase tracking-[0.22em] text-primary/80">

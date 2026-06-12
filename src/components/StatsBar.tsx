@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 
+import CountUp from "@/components/CountUp";
+
 const stats = [
   { number: "10,000+", label: "Users shipped to" },
   { number: "150+", label: "User interviews conducted" },
@@ -24,7 +26,9 @@ const StatsBar = () => (
           viewport={{ once: true }}
           transition={{ delay: i * 0.1, duration: 0.4 }}
         >
-          <div className="font-mono text-2xl font-medium text-primary md:text-3xl">{s.number}</div>
+          <div className="font-mono text-2xl font-medium text-primary md:text-3xl">
+            <CountUp value={s.number} />
+          </div>
           <div className="mt-1 font-mono text-xs text-muted-foreground">{s.label}</div>
         </motion.div>
       ))}
